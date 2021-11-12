@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+constexpr int rows{100}, col{100};
+
+void showArray(int tab[][col], int rows, int col);
+void enterArray(int tab[][col], int rows, int col);
+void rotateArray( int tab[][col], int tabRot[][col],  int rows, int col);
+
+int main()
+{
+
+   int tab[rows][col];
+   int tabRot[rows][col];
+   int p , q , t;
+
+   cin >> t;
+
+   while(t){
+       cin >> p >> q;
+       enterArray(tab,p,q);
+       showArray(tab,p,q);
+       rotateArray(tab, tabRot, p, q);
+       showArray(tabRot,p,q);
+       --t;
+    }
+   return 0;
+}
+
+//***************************************************************************************************************
+
+void showArray(int tab[rows][col], int p, int q){
+    for(int i = 0; i < p ; i++){
+        for(int j = 0 ; j < q ; j++){
+            cout << tab[i][j] <<" ";
+        }
+        cout << endl;
+    }
+    cout <<endl;
+}
+
+void enterArray(int tab[rows][col], int p, int q){
+    for(int i = 0; i < p ; i++){
+        for(int j = 0 ; j < q ; j++){
+           cin >> tab[i][j];
+        }
+    }
+}
+
+void rotateArray( int tab[][col], int tabRot[][col],  int rows, int col)
+{
+    for(int i = 0 ; i < rows ;  ++i){
+        for(int j = 0 ; j < col ; ++j){
+            if(i == 0 && j != col-1) tabRot[i][j] = tab[i][j+1] ;
+            else if(i != rows-1 && j == col-1) tabRot[i][j] = tab[i+1][j];
+            else if(i != 0 && j == 0) tabRot[i][j] = tab[i-1][j];
+            else if(i == rows-1 && j != 0) tabRot[i][j] = tab[i][j-1];
+            else tabRot[i][j] = tab[i][j];
+        }
+    }
+}
